@@ -1,4 +1,4 @@
-=== Test Plugin ===
+=== WP Coin Prices Plugin ===
 Contributors: Salman
 Tags: Coins, Coin, Prices
 Donate link: http://example.com/
