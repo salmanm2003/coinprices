@@ -35,7 +35,7 @@ class Coin_Prices_Widget extends WP_Widget
         $title = isset($instance['title'])?apply_filters('widget_title', $instance['title']):'';
 		$limit = isset($instance['limit'])?$instance['limit']:'100';
 		
-		// Retrieve the data from the cache if available 
+		// Retrieve the data from the WPcache if available
         $request = wp_cache_get( 'request');
         if ( false === $request ) {
 			// If not available send an API request
