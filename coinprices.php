@@ -75,7 +75,7 @@ class Coin_Prices_Widget extends WP_Widget
 				    
 		            if ($coins_list) {
 					?>
-                    <table class="table">
+                    <table class="table" id="table_1">
                         <?php
 				        foreach ($coins_list as $coin) {
 					    ?>
@@ -108,7 +108,7 @@ class Coin_Prices_Widget extends WP_Widget
 					<?php
 					if($coins_list) {
 					?>
-					<table class="table">
+					<table class="table" id="table_2">
                         <?php
 				        foreach ($coins_list as $coin) {
 					    ?>
@@ -135,6 +135,8 @@ class Coin_Prices_Widget extends WP_Widget
 					} else { echo "No internet connection"; }
 					?>
                  </div>
+				 <label class="label" for="limit"> Limit: </label>
+				 <input name="limit" value="100" id="limit" class="limit" onchange="changeLimit()" />
              </div>
 		 </div>
 		 <?php
