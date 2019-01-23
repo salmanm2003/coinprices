@@ -35,9 +35,16 @@ class Coin_Prices_Widget extends WP_Widget
         $title = isset($instance['title'])?apply_filters('widget_title', $instance['title']):'';
 		$limit = isset($instance['limit'])?$instance['limit']:'100';
 		
-		//Get the coins
-        $request = wp_remote_get('https://api.coinmarketcap.com/v2/ticker/?limit='.$limit);
-        $body    = wp_remote_retrieve_body($request);
+		// Retrieve the data from the cache if available 
+        $request = wp_cache_get( 'request');
+        if ( false === $request ) {
+			// If not available send an API request
+	        $request = wp_remote_get('https://api.coinmarketcap.com/v2/ticker/?limit='.$limit);
+	        wp_cache_set( 'request', $request, '', '3600' );
+		}
+		
+        // Get the coins list 
+		$body = wp_remote_retrieve_body($request);
 		
 		// WordPress core before_widget hook (always include )
 		echo $before_widget;
