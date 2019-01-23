@@ -1,0 +1,84 @@
+#coinprices h1 {
+	margin: 0;
+	font-family: 'Bree Serif', serif;
+	font-size: 36px;
+}
+#coinprices table {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 0;
+	font-size: 15px;
+	line-height: 0;
+	color: #666;
+	font-weight: bold;
+	border-collapse: unset;
+}
+#coinprices table tr{
+	background:transparent;
+	/* border: 1px solid #b75454; */
+	border-collapse: initial;
+}
+#coinprices table tr td{
+	border-bottom: 1px solid #f1f1f1 !important;
+	border-collapse:initial;
+	text-align:right;
+}
+#coinprices .tabs {
+	display: flex;
+	flex-wrap: wrap;
+	/* max-width: 700px; */
+	background: #f6f6f6;
+	/* box-shadow: 0 48px 80px -32px rgba(0,0,0,0.3); */
+}
+#coinprices .input {
+	position: absolute;
+	opacity: 0;
+}
+#coinprices .label {
+	width: 100%;
+	padding: 15px 25px;
+	background: #f6f6f6;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 16px;
+	color: #4aad91;
+	transition: background 0.1s, color 0.1s;
+}
+#coinprices .label:hover {
+	background: #fbfbfb;
+}
+#coinprices .label:active {
+	background: #fbfbfb;
+}
+#coinprices .input:focus + .label {
+	box-shadow: inset 0px 0px 0px 3px #2aa1c0;
+	z-index: 1;
+}
+#coinprices .input:checked + .label {
+	background: #fff;
+	color: #666;
+	font-size: 17px;
+	font-weight: bold;
+}
+@media (min-width: 600px) {
+	#coinprices   .label {
+		width: auto;
+	}
+}
+#coinprices .panel {
+	display: none;
+	padding: 0px;
+	width: 100%;
+	background: #fff;
+}
+@media (min-width: 600px) {
+	#coinprices   .panel {
+		order: 99;
+	}
+}
+#coinprices .input:checked + .label + .panel {
+	display: block;
+	display: block;
+	height: 300px;
+	overflow-y: scroll;
+}
