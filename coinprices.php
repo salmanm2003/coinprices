@@ -55,103 +55,13 @@ class Coin_Prices_Widget extends WP_Widget
 		}
 
         // Display the widget
-        // Didnt have enough time to move the styles to a separate file
-		?>
-
-        <style>
-			#coinprices {
-				border:1px solid #ccc;
-			}
-			#coinprices .table {
-				margin-top: 0;
-				margin-bottom: 0;
-				padding: 0;
-				font-size: 15px;
-				line-height: 0;
-				color: #666;
-				font-weight: bold;
-				border-collapse: unset;
-			}
-			#coinprices .table--row{
-				background:transparent;
-				/* border: 1px solid #b75454; */
-				border-collapse: initial;
-			}
-			#coinprices .table--row--cell{
-				border-bottom: 1px solid #f1f1f1 !important;
-				border-collapse:initial;
-				text-align:right;
-			}
-			#coinprices .table--cell--left{
-				text-align:left;
-			}
-			#coinprices .table--cell--right{
-				text-align:right;
-			}
-			#coinprices .table--cell--blue{
-				color:#4aad91;
-			}
-			#coinprices .tabs {
-				display: flex;
-				flex-wrap: wrap;
-				/* max-width: 700px; */
-				background: #f6f6f6;
-				/* box-shadow: 0 48px 80px -32px rgba(0,0,0,0.3); */
-			}
-			#coinprices .input {
-				position: absolute;
-				opacity: 0;
-			}
-			#coinprices .label {
-				width: 100%;
-				padding: 15px 25px;
-				background: #f6f6f6;
-				cursor: pointer;
-				font-weight: bold;
-				font-size: 16px;
-				color: #4aad91;
-				transition: background 0.1s, color 0.1s;
-			}
-			#coinprices .label:hover {
-				background: #fbfbfb;
-			}
-			#coinprices .label:active {
-				background: #fbfbfb;
-			}
-			#coinprices .input:focus + .label {
-				box-shadow: inset 0px 0px 0px 3px #2aa1c0;
-				z-index: 1;
-			}
-			#coinprices .input:checked + .label {
-				background: #fff;
-				color: #666;
-				font-size: 17px;
-				font-weight: bold;
-			}
-			@media (min-width: 600px) {
-				#coinprices   .label {
-					width: auto;
-				}
-			}
-			#coinprices .panel {
-				display: none;
-				padding: 0px;
-				width: 100%;
-				background: #fff;
-			}
-			@media (min-width: 600px) {
-				#coinprices   .panel {
-					order: 99;
-				}
-			}
-			#coinprices .input:checked + .label + .panel {
-				display: block;
-				display: block;
-				height: 300px;
-				overflow-y: scroll;
-			}
-        </style>
-
+        // Add external css and js files
+		wp_register_script ( 'pluginjs', plugins_url ( '/_inc/coinsprice.js', __FILE__ ) );
+        wp_register_style ( 'plugincss', plugins_url ( '/_inc/coinsprice.css', __FILE__ ) );
+		wp_enqueue_script('pluginjs');
+        wp_enqueue_style('plugincss');
+        ?>
+		
         <div id="coinprices">
             <div class="tabs">
                 <input class="input" name="tabs" type="radio" id="tab-1" checked="checked"/>
@@ -180,7 +90,7 @@ class Coin_Prices_Widget extends WP_Widget
                                 $<?=number_format($coin->quotes->USD->price,2);?> 
                                 (<?=$coin->quotes->USD->percent_change_1h;?>%)
                             </td>
-                            <td class="table--row--cell">
+                            <td width="50" class="table--row--cell table--cell--right">
                                 <?=($coin->quotes->USD->percent_change_1h > 0)?$up_arrow:$down_arrow;?>
                             </td>
                         </tr>
@@ -213,7 +123,7 @@ class Coin_Prices_Widget extends WP_Widget
                                 &euro;<?=number_format($coin->quotes->USD->price*0.88,2);?> 
                                 (<?=$coin->quotes->USD->percent_change_1h;?>%)
                             </td>
-                            <td class="table--row--cell">
+                            <td width="50" class="table--row--cell table--cell--right">
                                 <?=($coin->quotes->USD->percent_change_1h > 0)?$up_arrow:$down_arrow;?>
                             </td>
                         </tr>
@@ -288,7 +198,14 @@ class Coin_Prices_Widget extends WP_Widget
 		return $instance;
 	}
 	
+	function frontendEnqueue() {
+        wp_enqueue_style( 'coinpricesStyle', plugins_url( '/_inc/coinsprice.css', __FILE__ ));
+        wp_enqueue_script( 'CoinpricesScript', plugins_url( '/_inc/js/coinsprice.js', __FILE__ ));
+    }
+	
 }
+
+add_action( '_init', 'addCss' );
 
 add_action( 'widgets_init', function() {
 	register_widget( 'Coin_Prices_Widget' );

@@ -1,9 +1,7 @@
-#coinprices h1 {
-	margin: 0;
-	font-family: 'Bree Serif', serif;
-	font-size: 36px;
+#coinprices {
+	border:1px solid #ccc;
 }
-#coinprices table {
+#coinprices .table {
 	margin-top: 0;
 	margin-bottom: 0;
 	padding: 0;
@@ -13,15 +11,24 @@
 	font-weight: bold;
 	border-collapse: unset;
 }
-#coinprices table tr{
+#coinprices .table--row{
 	background:transparent;
 	/* border: 1px solid #b75454; */
 	border-collapse: initial;
 }
-#coinprices table tr td{
+#coinprices .table--row--cell{
 	border-bottom: 1px solid #f1f1f1 !important;
 	border-collapse:initial;
 	text-align:right;
+}
+#coinprices .table--cell--left{
+	text-align:left;
+}
+#coinprices .table--cell--right{
+	text-align:right;
+}
+#coinprices .table--cell--blue{
+	color:#4aad91;
 }
 #coinprices .tabs {
 	display: flex;
