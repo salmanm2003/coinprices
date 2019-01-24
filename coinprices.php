@@ -79,19 +79,19 @@ class Coin_Prices_Widget extends WP_Widget
                         <?php
 				        foreach ($coins_list as $coin) {
 					    ?>
-                        <tr class="table--row">
+                        <tr class="table--row" id="t1_rw_<?=strtolower($coin->symbol)?>">
                             <td width="50" class="table--row--cell">
 							    <img src="<?=plugin_dir_url( __FILE__ ).'_inc/img/icon/'.strtolower($coin->symbol).'.svg'; ?>">
 							</td>
                             <td width="100" class="table--row--cell table--cell--left">
-					            <?=$coin->name;?>
+					            <?=$coin->symbol;?>
                             </td>
                             <td class="table--row--cell table--cell--right table--cell--blue">
                                 $<?=number_format($coin->quotes->USD->price,2);?> 
                                 (<?=$coin->quotes->USD->percent_change_1h;?>%)
                             </td>
                             <td width="50" class="table--row--cell table--cell--right">
-                                <?=($coin->quotes->USD->percent_change_1h > 0)?$up_arrow:$down_arrow;?>
+                                <img src="<?=plugin_dir_url( __FILE__ )?>_inc/img/up.svg" onclick="upward('<?=strtolower($coin->symbol)?>')" >
                             </td>
                         </tr>
                         <?php
@@ -117,14 +117,14 @@ class Coin_Prices_Widget extends WP_Widget
 							    <img src="<?=plugin_dir_url( __FILE__ ).'_inc/img/icon/'.strtolower($coin->symbol).'.svg'; ?>">
 							</td>
                             <td width="100" class="table--row--cell table--cell--left">
-					            <?=$coin->name;?>
+					            <?=$coin->symbol;?>
                             </td>
                             <td class="table--row--cell table--cell--right table--cell--blue">
                                 &euro;<?=number_format($coin->quotes->USD->price*0.88,2);?> 
                                 (<?=$coin->quotes->USD->percent_change_1h;?>%)
                             </td>
                             <td width="50" class="table--row--cell table--cell--right">
-                                <?=($coin->quotes->USD->percent_change_1h > 0)?$up_arrow:$down_arrow;?>
+                                <img src="<?=plugin_dir_url( __FILE__ )?>_inc/img/up.svg" onclick="upward('<?=strtolower($coin->symbol)?>')" >
                             </td>
                         </tr>
                         <?php
